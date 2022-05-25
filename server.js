@@ -9,7 +9,7 @@ const Client = new Discord.Client({
     ]
 })
 
-const LoadOrder = ["DataHandler", "RoleManager"]
+const LoadOrder = ["RoleManager"]
 const Parameters = {}
 
 const LoadedModules = {}

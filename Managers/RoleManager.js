@@ -14,7 +14,7 @@ function GetGuild() {
 
 function GetRole(RoleName, Guild) {
     if (!Guild) {
-        Guild = Main.Client.guilds.cache.get(Settings.MainGuildId)
+        Guild = Main.Client.guilds.cache.get(process.env.GUILDID)
     }
 
     return Guild.roles.cache.find(r => r.id === Main.RoleReferences[RoleName])

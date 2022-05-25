@@ -1,16 +1,15 @@
 const { REST } = require("@discordjs/rest")
 const DiscordAPI = require("discord-api-types/v9")
 const Builder = require("@discordjs/builders")
-const GetFolderContents = require("../GlobalFunctions/GetFolderContents.js")
+const fs = require("fs")
 const RoleManager = require("./RoleManager.js")
-const Settings = require("../Settings.json")
 const Main = {
     Initialize: Initialize,
     Commands: {}
 }
 
 async function Initialize(Client) {
-    const Contents = await GetFolderContents("./Commands")
+    const Contents = await fs.readdirSync("./Commands")
     const SlashCommands = []
 
     for (const Index in Contents) {
@@ -54,7 +53,7 @@ async function Initialize(Client) {
     }).setToken(process.env.TOKEN)
 
     await ActivatedREST.put(
-        DiscordAPI.Routes.applicationGuildCommands(Client.user.id, Settings.MainGuildId),
+        DiscordAPI.Routes.applicationGuildCommands(Client.user.id, process.env.GUILDID),
         {
             body: SlashCommands
         }
